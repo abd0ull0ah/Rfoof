@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة رفوف تعليمية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            direction: rtl;
+            text-align: center;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .semesters, .grades {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            padding: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .admin-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .subject-page {
+            padding: 20px;
+        }
+        .subject-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px auto;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>مكتبة رفوف تعليمية</h1>
+        <p class="subtitle">للمرحلة الابتدائية لعام ١٤٤٧هـ</p>
+    </header>
+
+    <section class="semesters">
+        <div class="card" onclick="alert('الفصل الدراسي الأول - الجزء الأول')">
+            <img src="https://via.placeholder.com/150" alt="الفصل الأول">
+            <p>الفصل الأول - الجزء الأول</p>
+        </div>
+        <div class="card" onclick="alert('الفصل الدراسي الأول - الجزء الثاني')">
+            <img src="https://via.placeholder.com/150" alt="الفصل الأول">
+            <p>الفصل الأول - الجزء الثاني</p>
+        </div>
+        <div class="card" onclick="alert('الفصل الدراسي الثاني - الجزء الأول')">
+            <img src="https://via.placeholder.com/150" alt="الفصل الثاني">
+            <p>الفصل الثاني - الجزء الأول</p>
+        </div>
+        <div class="card" onclick="alert('الفصل الدراسي الثاني - الجزء الثاني')">
+            <img src="https://via.placeholder.com/150" alt="الفصل الثاني">
+            <p>الفصل الثاني - الجزء الثاني</p>
+        </div>
+    </section>
+
+    <section class="grades">
+        <div class="card grade" data-grade="1" onclick="openGradePage(1)">
+            <img src="https://via.placeholder.com/150" alt="الصف الأول">
+            <p>الصف الأول الابتدائي</p>
+        </div>
+        <div class="card grade" data-grade="2" onclick="openGradePage(2)">
+            <img src="https://via.placeholder.com/150" alt="الصف الثاني">
+            <p>الصف الثاني الابتدائي</p>
+        </div>
+        <div class="card grade" data-grade="3" onclick="openGradePage(3)">
+            <img src="https://via.placeholder.com/150" alt="الصف الثالث">
+            <p>الصف الثالث الابتدائي</p>
+        </div>
+        <div class="card grade" data-grade="4" onclick="openGradePage(4)">
+            <img src="https://via.placeholder.com/150" alt="الصف الرابع">
+            <p>الصف الرابع الابتدائي</p>
+        </div>
+        <div class="card grade" data-grade="5" onclick="openGradePage(5)">
+            <img src="https://via.placeholder.com/150" alt="الصف الخامس">
+            <p>الصف الخامس الابتدائي</p>
+        </div>
+        <div class="card grade" data-grade="6" onclick="openGradePage(6)">
+            <img src="https://via.placeholder.com/150" alt="الصف السادس">
+            <p>الصف السادس الابتدائي</p>
+        </div>
+    </section>
+
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-content">
+            <h2>لوحة التحكم</h2>
+            <input type="text" id="username" placeholder="اسم المستخدم">
+            <input type="password" id="password" placeholder="كلمة المرور">
+            <button onclick="login()">تسجيل الدخول</button>
+            <div id="adminControls" style="display: none;">
+                <h3>إدارة الألوان</h3>
+                <select id="gradeSelect">
+                    <option value="1">الصف الأول</option>
+                    <option value="2">الصف الثاني</option>
+                    <option value="3">الصف الثالث</option>
+                    <option value="4">الصف الرابع</option>
+                    <option value="5">الصف الخامس</option>
+                    <option value="6">الصف السادس</option>
+                </select>
+                <input type="color" id="colorPicker">
+                <button onclick="changeGradeColor()">تغيير اللون</button>
+                <h3>إضافة صفحة جديدة</h3>
+                <input type="text" id="newPageName" placeholder="اسم الصفحة">
+                <button onclick="addNewPage()">إضافة صفحة</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>زوروا قناتنا على التليجرام: <a href="https://t.me/Educational_shelves">https://t.me/Educational_shelves</a></p>
+    </footer>
+
+    <script>
+        function openGradePage(grade) {
+            const subjects = [
+                { name: "الرياضيات", semester: "الأول", part: "الجزء الأول", downloads: 150, file: "math.pdf" },
+                { name: "العلوم", semester: "الأول", part: "الجزء الثاني", downloads: 120, file: "science.pdf" }
+            ];
+            const subjectPage = `
+                <div class="subject-page">
+                    <h2>الصف ${grade} الابتدائي</h2>
+                    ${subjects.map(subject => `
+                        <div class="subject-card">
+                            <input type="file" accept="image/*" onchange="uploadImage(this, '${subject.name}')">
+                            <img src="https://via.placeholder.com/150" alt="${subject.name}" id="img-${subject.name}">
+                            <h3>${subject.name}</h3>
+                            <p>الفصل: ${subject.semester} - ${subject.part}</p>
+                            <p>عدد التنزيلات: ${subject.downloads}</p>
+                            <a href="${subject.file}" download>تحميل الكتاب</a>
+                        </div>
+                    `).join('')}
+                </div>
+                <footer>
+                    <p>زوروا قناتنا على التليجرام: <a href="https://t.me/Educational_shelves">https://t.me/Educational_shelves</a></p>
+                </footer>
+            `;
+            document.body.innerHTML = subjectPage;
+        }
+
+        function uploadImage(input, subjectName) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(`img-${subjectName}`).src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'abogeath' && password === '123456') {
+                document.getElementById('adminControls').style.display = 'block';
+            } else {
+                alert('اسم المستخدم أو كلمة المرور غير صحيحة');
+            }
+        }
+
+        function changeGradeColor() {
+            const grade = document.getElementById('gradeSelect').value;
+            const color = document.getElementById('colorPicker').value;
+            const gradeCards = document.querySelectorAll(`.grade[data-grade="${grade}"]`);
+            gradeCards.forEach(card => card.style.backgroundColor = color);
+        }
+
+        function addNewPage() {
+            const pageName = document.getElementById('newPageName').value;
+            if (pageName) {
+                alert(`تم إضافة صفحة جديدة: ${pageName}`);
+                // يحتاج إلى خادم لتخزين الصفحة الجديدة
+            } else {
+                alert('يرجى إدخال اسم الصفحة');
+            }
+        }
+
+        // فتح لوحة التحكم
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'l') {
+                document.getElementById('adminPanel').style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+</html>
